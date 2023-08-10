@@ -92,23 +92,27 @@ let decrement = (id) => {
 }
 
 let update = (id) => {
-  let search = basket.find((x) => x.id === id)  
+  let search = basket.find((x) => x.id === id)
   calc();
 }
 
 let removeItem = (id) => {
   let selectedItem = id
   basket = basket.filter((el) => el.id !== selectedItem.id)
-  
-  generateCartItems(); 
+
+  generateCartItems();
   localStorage.setItem("dataItems", JSON.stringify(basket))
 }
 
 let totalAmount = () => {
-  if(basket.length !== 0 ){
+  if (basket.length !== 0) {
     let amount = basket.map((el) => {
-      let {item, id} = el
-    })
-  }
-  else return
+      let { item, id } = el
+      let search = shopItemsData.find((x) => x.id === id) || []
+
+      return item * search.price;
+    }).reduce((x, y) => x + y, 0)
+  } else return;
 }
+
+totalAmount();
