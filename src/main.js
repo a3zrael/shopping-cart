@@ -1,34 +1,5 @@
 const shop = document.getElementById("shop")
 
-let shopItemsData = [{
-    id: "oejfoijs",
-    name: 'Casual shirt',
-    price: 45,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    image: "img/img-1.jpg"
-},
-{
-    id: "dsfsdf",
-    name: 'Office shirt',
-    price: 100,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    image: "img/img-2.jpg"
-},
-{
-    id: "lclskmpdcm",
-    name: 'T shirt',
-    price: 25,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    image: "img/img-3.jpg"
-},
-{
-    id: "pqwkekd",
-    name: 'Mens Suit',
-    price: 300,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    image: "img/img-4.jpg"
-}]
-
 let basket = JSON.parse(localStorage.getItem("dataItems")) || []
 
 const generateShop = () => {
@@ -38,11 +9,11 @@ const generateShop = () => {
         return `
         <div id=product-id-${id} class="item">
         <img width="220" src=${image} alt="">
-        <div class="details">
+        <div class="details-item">
           <h3>${name}</h3>
           <p>${desc}</p>
           <div class="price_quantity">
-            <h2>${price}$</h2>
+            <h2>$ ${price}</h2>
             <div class="buttons">
               <i onClick="decrement(${id})" class="bi bi-dash-lg"></i>
               <div id=${id} class="quantity">${search.item === undefined ? 0 : search.item}</div>
