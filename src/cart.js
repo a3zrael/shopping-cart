@@ -68,6 +68,7 @@ let increment = (id) => {
   }
 
   update(selectedItem.id);
+  totalAmount();
   generateCartItems();
   localStorage.setItem("dataItems", JSON.stringify(basket))
 }
@@ -86,6 +87,7 @@ let decrement = (id) => {
   update(selectedItem.id);
 
   basket = basket.filter((el) => el.item !== 0)
+  totalAmount();
   generateCartItems();
 
   localStorage.setItem("dataItems", JSON.stringify(basket))
@@ -99,8 +101,16 @@ let update = (id) => {
 let removeItem = (id) => {
   let selectedItem = id
   basket = basket.filter((el) => el.id !== selectedItem.id)
-
+  totalAmount();
   generateCartItems();
+  calc();
+  localStorage.setItem("dataItems", JSON.stringify(basket))
+}
+
+let clearCart = () => {
+  basket = [];
+  generateCartItems();
+  calc();
   localStorage.setItem("dataItems", JSON.stringify(basket))
 }
 
@@ -112,6 +122,11 @@ let totalAmount = () => {
 
       return item * search.price;
     }).reduce((x, y) => x + y, 0)
+    label.innerHTML = `
+    <h2>Total Bill: $ ${amount}</h2>
+    <button class="checkout">Checkout</button>
+    <button onClick="clearCart()" class="removeAll">Clear Cart</button>
+    `
   } else return;
 }
 
